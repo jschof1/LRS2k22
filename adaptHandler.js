@@ -3,6 +3,10 @@ var json2csv = require('json2csv'); // Library to create CSV for output
 var promiseCount = 0;
 
 exports.getObjectById = function(req,res,dbo,collection,id) {
+	
+	console.log("getObjectById: " + id
+		+ " collection: " + collection
+		+ " db: " + dbo.getDb().databaseName);
 	var dbConnect = dbo.getDb();
 	collection = collection + "s";
 	dbConnect

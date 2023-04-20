@@ -393,6 +393,7 @@ const combineQuestionSummaryResults = (arr) => {
  */
 function makeQuestionDataCSVOutput(output) {
     var choices = output.object.definition.choices;
+    console.log(choices)
     if (!choices) {
         //FIXME A MATCHING COMPONENT
         return [];

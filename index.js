@@ -16,14 +16,8 @@ var adaptapi = require('./adaptHandler');
 var userHandler = require('./userHandler');
 const adaptdb = require("./db/adapt-aat");
 
-if (process.env.SSLKEY) {
-  var privateKey  = fs.readFileSync(process.env.SSLKEY, 'utf8');
-  var certificate = fs.readFileSync(process.env.SSLCERT, 'utf8');
-  var credentials = {key: privateKey, cert: certificate};
-}
-
 const app = express();
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 module.exports = app;
 
@@ -369,12 +363,5 @@ dbo.connectToServer(function (err) {
   httpServer.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
   });
-  if (process.env.SSLKEY) {
-    const securePort = process.env.SECUREPORT || 443;
-    var httpsServer = https.createServer(credentials,app);
-    httpsServer.listen(securePort, () => {
-      console.log(`Server is running on port: 443`);
-    });
-  }
 
 });
